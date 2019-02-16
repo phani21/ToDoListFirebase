@@ -10,20 +10,20 @@ import UIKit
 
 
 class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
-   // var rows:Int = 0
+  
     var getComp=""
-    var compArray=["init"]
+    var compArray=[String]()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return compArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath1: IndexPath) -> UITableViewCell {
-       // print("third VC")
+      
        
         if flag==true{
-       // print(getComp)
+    
             print("Get comp \(getComp)")
-            // compArray.insert(getComp, at: 0)}}
+           
         };
         let cell=tableView.dequeueReusableCell(withIdentifier: "cellComp", for: indexPath1) as UITableViewCell
         
@@ -39,27 +39,22 @@ class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    //    UserDefaults.standard.removeObject(forKey: "keycom")
-      // if(UserDefaults.standard.value(forKey: "keycome") != nil){
-        compArray=UserDefaults.standard.value(forKey: "keycom") as! [String]
-       // print("\(UserDefaults.standard.value(forKey: "keycom")) inside Third VC")
+        
+        var k = false
+    // UserDefaults.standard.removeObject(forKey: "keycom")
+      if(UserDefaults.standard.value(forKey: "keycom") != nil){
+        k = true
+         compArray=UserDefaults.standard.value(forKey: "keycom") as! [String]
+        }
+
         print(compArray)
-       if getComp != ""{
+       if getComp != "" {
+       
             compArray.insert(getComp, at: 0)
 
         }
-        // Do any additional setup after loading the view.
-    }
+        
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -14,7 +14,7 @@ class SecondViewController: UIViewController {
     
   
     @IBAction func addButton(_ sender: UIButton) {
-        //list=listText.text!
+      
         
         performSegue(withIdentifier: "addItem", sender: self)
         

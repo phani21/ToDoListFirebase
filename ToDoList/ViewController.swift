@@ -22,6 +22,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("textArray"); print(textArray)
             vc2.getComp=textArray[i]
             textArray.remove(at: i)
+            UserDefaults.standard.set(textArray, forKey: "key")
             }
                 
         
@@ -57,18 +58,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completed = UIContextualAction(style: .normal, title: "Completed") { (action, view, nil) in
-           // print("completed")
+            
              flag=true
             i=indexPath.row
            self.performSegue(withIdentifier: "completedSegue", sender:self)
-          // ThirdViewController()
-          //  print(indexPath.row)
-            
+        
             self.table.reloadData()
-            
-           // print("i=\(i)")
+       
            
         }
+        completed.backgroundColor = UIColor.green
+       
+        
         return UISwipeActionsConfiguration(actions: [completed])
         
     }
@@ -77,8 +78,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, nil) in
-           // print("Delete swiped")
+           
         textArray.remove(at: indexPath.row)
+            UserDefaults.standard.set(textArray,forKey: "key")
             self.table.reloadData()
             print(textArray)
         
