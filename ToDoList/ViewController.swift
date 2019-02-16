@@ -6,6 +6,7 @@
 //  Copyright © 2019 com.phani. All rights reserved.
 //
   var i : Int=0
+var flag = false
 import UIKit
   var textArray  = [String]()
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
@@ -16,11 +17,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "completedSegue"){
+        if(flag == true && segue.identifier == "completedSegue"){
             let vc2=segue.destination as! ThirdViewController
+            print("textArray"); print(textArray)
             vc2.getComp=textArray[i]
             textArray.remove(at: i)
-        }
+            }
+                
+        
     }
    
     
@@ -54,12 +58,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completed = UIContextualAction(style: .normal, title: "Completed") { (action, view, nil) in
            // print("completed")
-            self.performSegue(withIdentifier: "completedSegue", sender:self)
-           
-            print(indexPath.row)
-            self.table.reloadData()
+             flag=true
             i=indexPath.row
-            print("i=\(i)")
+           self.performSegue(withIdentifier: "completedSegue", sender:self)
+          // ThirdViewController()
+          //  print(indexPath.row)
+            
+            self.table.reloadData()
+            
+           // print("i=\(i)")
+           
         }
         return UISwipeActionsConfiguration(actions: [completed])
         

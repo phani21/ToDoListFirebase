@@ -108,7 +108,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="lAU-GQ-v8f">
                                             <connections>
                                                 <action selector="CompletedButton:" destination="BYZ-38-t0r" id="rbx-RO-a5h"/>
-                                                <segue destination="QaP-sW-yi7" kind="showDetail" identifier="completedSegue" id="d1L-AH-F7C"/>
+                                                <segue destination="QaP-sW-yi7" kind="presentation" identifier="completedSegue" id="d1L-AH-F7C"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" width="9" systemItem="add" id="V9T-xn-pgW">

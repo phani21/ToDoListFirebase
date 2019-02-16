@@ -12,22 +12,26 @@ import UIKit
 class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
    // var rows:Int = 0
     var getComp=""
-    var compArray=[String]()
+    var compArray=["init"]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getComp.count
+        return compArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath1: IndexPath) -> UITableViewCell {
        // print("third VC")
-        print(getComp)
-        compArray.insert(getComp, at: 0)
+       
+        if flag==true{
+       // print(getComp)
+            print("Get comp \(getComp)")
+            // compArray.insert(getComp, at: 0)}}
+        };
         let cell=tableView.dequeueReusableCell(withIdentifier: "cellComp", for: indexPath1) as UITableViewCell
         
         
         cell.textLabel?.text = compArray[indexPath1.row]
          UserDefaults.standard.set(compArray, forKey: "keycom")
         
-     
+          flag = false
         return cell
         
     }
@@ -35,13 +39,15 @@ class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    //    UserDefaults.standard.removeObject(forKey: "keycom")
+      // if(UserDefaults.standard.value(forKey: "keycome") != nil){
         compArray=UserDefaults.standard.value(forKey: "keycom") as! [String]
-        
-        
-      //  if getComp != ""{
+       // print("\(UserDefaults.standard.value(forKey: "keycom")) inside Third VC")
+        print(compArray)
+       if getComp != ""{
             compArray.insert(getComp, at: 0)
 
-
+        }
         // Do any additional setup after loading the view.
     }
     
