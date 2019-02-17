@@ -18,43 +18,26 @@ class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath1: IndexPath) -> UITableViewCell {
-      
-       
-        if flag==true{
-    
-            print("Get comp \(getComp)")
-           
-        };
         let cell=tableView.dequeueReusableCell(withIdentifier: "cellComp", for: indexPath1) as UITableViewCell
-        
-        
         cell.textLabel?.text = compArray[indexPath1.row]
-         UserDefaults.standard.set(compArray, forKey: "keycom")
-        
-          flag = false
         return cell
-        
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var k = false
-    // UserDefaults.standard.removeObject(forKey: "keycom")
-      if(UserDefaults.standard.value(forKey: "keycom") != nil){
-        k = true
-         compArray=UserDefaults.standard.value(forKey: "keycom") as! [String]
-        }
-
-        print(compArray)
-       if getComp != "" {
-       
-            compArray.insert(getComp, at: 0)
-
-        }
+    // UserDefaults.standard.removeObject(forKey: "keykey")
         
-    
-
-
+      if(UserDefaults.standard.value(forKey: "keykey") != nil)
+      {
+        compArray=UserDefaults.standard.value(forKey: "keykey") as! [String]
+        if compArray.isEmpty == false
+        {
+        print("Third VC \(compArray)")
+        }
+      }
+        print(compArray)
+        
+}
 }
