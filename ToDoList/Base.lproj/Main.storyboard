@@ -70,6 +70,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zWz-hV-bXP"/>
                     </view>
+                    <connections>
+                        <outlet property="completedtable" destination="Qf7-DS-VYq" id="VC0-N4-Fyw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGI-Lc-bUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -190,6 +193,6 @@
         <image name="hamburgericon" width="128" height="118"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kca-Wi-zvV"/>
+        <segue reference="Ych-wm-P9f"/>
     </inferredMetricsTieBreakers>
 </document>

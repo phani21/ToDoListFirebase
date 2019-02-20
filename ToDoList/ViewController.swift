@@ -6,6 +6,7 @@
 //  Copyright © 2019 com.phani. All rights reserved.
 //
   //var i : Int=0
+import Firebase
 import UIKit
   var textArray  = [String]()
 var completedArray = [String]()
@@ -17,14 +18,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("TextARRAY COUNT   \(textArray.count)")
         return textArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell=tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+      //textArray.insert(text, at: 0)
+    
+         let  reff = Database.database().reference().child("list/list")
+        reff.observe(.value) { (snapshot) in
+            textArray = snapshot.value as AnyObject as! [String]}
         
         cell.textLabel?.text = textArray[indexPath.row]
-        UserDefaults.standard.set(textArray, forKey: "key")
+        
+       let ref4 = Database.database().reference().child("list/list")
+        ref4.setValue(textArray)
+        
+    
+        //UserDefaults.standard.set(textArray, forKey: "key")
         return cell
     }
     
@@ -33,11 +45,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let completed = UIContextualAction(style: .normal, title: "Completed") { (action, view, nil) in
      
             completedArray.insert(textArray[indexPath.row], at: 0)
-            UserDefaults.standard.set(completedArray,forKey:"keykey")
+          //  UserDefaults.standard.set(completedArray,forKey:"keykey")
+            
+            let ref = Database.database().reference().child("complist")
+            ref.child("complist").setValue(completedArray)
+            
             print("Completed Array :  \(completedArray)")
-            print(UserDefaults.standard.value(forKey: "keykey")!)
+            
+//            let  ref2 = Database.database().reference()
+//            ref2.child("complist/complist").observeSingleEvent(of: .value) { (snapshot) in
+//                namedataArr = snapshot.value as! AnyObject as! [String]
+//
+        //   print(UserDefaults.standard.value(forKey: "keykey")!)
+            
+            
             textArray.remove(at: indexPath.row)
-            UserDefaults.standard.set(textArray,forKey: "key")
+            
+            
+            let ref1 = Database.database().reference().child("list")
+            ref1.child("list").setValue(textArray)
+           // UserDefaults.standard.set(textArray,forKey: "key")
          
             self.table.reloadData()
         }
@@ -49,7 +76,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, nil) in
            
         textArray.remove(at: indexPath.row)
-            UserDefaults.standard.set(textArray,forKey: "key")
+            
+            let ref1 = Database.database().reference().child("list/list")
+            ref1.setValue(textArray)
+         //   UserDefaults.standard.set(textArray,forKey: "key")
             self.table.reloadData()
             print(textArray)
         }
@@ -58,16 +88,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-            textArray=UserDefaults.standard.value(forKey: "key") as! [String]
-        
-        if text != ""{
-            textArray.insert(text, at: 0)
-
+    
+         print("Inside Viewcontroller.ViewDidLoad()")
+            //textArray=UserDefaults.standard.value(forKey: "key") as! [String]
+        if(self.text != ""){
+            textArray.insert(self.text, at: 0)
+            let ref5 = Database.database().reference().child("list/list")
+            ref5.setValue(textArray)
+            self.table.reloadData()
         }
-        
-    }
+        let  ref = Database.database().reference().child("list/list")
+        ref.observe(.value) { (snapshot) in
+            textArray = snapshot.value  as! [String]
+           print("textARRAYY")
+            print(textArray)
+             self.table.reloadData()
+        }
+
+       
+       
+      
+    
 
 
 }
 
+}
