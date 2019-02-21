@@ -49,7 +49,7 @@ class ThirdViewController: UIViewController,UITableViewDataSource,UITableViewDel
         
         let  ref4 = Database.database().reference()
         ref4.child("complist/complist").observe(.value) { (snapshot) in
-            completedArray = snapshot.value as AnyObject as! [String]
+            completedArray = snapshot.value  as? [String] ?? []
       
             print("ViewDIDLOAD COMPLETED ARRAY"); print(completedArray)
             self.completedtable.reloadData()

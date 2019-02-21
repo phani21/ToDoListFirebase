@@ -99,7 +99,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         let  ref = Database.database().reference().child("list/list")
         ref.observe(.value) { (snapshot) in
-            textArray = snapshot.value  as! [String]
+            textArray = snapshot.value  as? [String] ?? []
            print("textARRAYY")
             print(textArray)
              self.table.reloadData()
